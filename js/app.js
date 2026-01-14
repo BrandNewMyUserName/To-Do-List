@@ -26,7 +26,7 @@ class TaskApp {
         this.emptyState = document.getElementById('emptyState');
         this.taskCount = document.getElementById('taskCount');
         this.clearCompletedBtn = document.getElementById('clearCompletedBtn');
-        this.filterButtons = document.querySelectorAll('.filter-btn');
+        this.filterButtons = document.querySelectorAll('.filter-group__button');
     }
 
     /**
@@ -98,7 +98,7 @@ class TaskApp {
         
         // Update active filter button
         this.filterButtons.forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.filter === filter);
+            btn.classList.toggle('filter-group__button--active', btn.dataset.filter === filter);
         });
 
         this.render();
@@ -125,9 +125,9 @@ class TaskApp {
         // Render tasks
         if (tasks.length === 0) {
             this.taskList.innerHTML = '';
-            this.emptyState.classList.add('show');
+            this.emptyState.classList.add('empty-state--visible');
         } else {
-            this.emptyState.classList.remove('show');
+            this.emptyState.classList.remove('empty-state--visible');
             this.taskList.innerHTML = tasks.map(task => this.createTaskHTML(task)).join('');
         }
 
@@ -135,8 +135,8 @@ class TaskApp {
         tasks.forEach(task => {
             const taskElement = document.querySelector(`[data-task-id="${task.id}"]`);
             if (taskElement) {
-                const checkbox = taskElement.querySelector('.task-checkbox');
-                const deleteBtn = taskElement.querySelector('.delete-task-btn');
+                const checkbox = taskElement.querySelector('.task-item__checkbox');
+                const deleteBtn = taskElement.querySelector('.task-item__button');
 
                 if (checkbox) {
                     checkbox.addEventListener('change', () => this.handleToggleTask(task.id));
@@ -162,20 +162,22 @@ class TaskApp {
      */
     createTaskHTML(task) {
         return `
-            <div class="task-item d-flex align-items-center gap-3 p-3 mb-2 border rounded ${task.completed ? 'completed' : ''}" 
+            <div class="task-item ${task.completed ? 'task-item--completed' : ''}" 
                  data-task-id="${task.id}">
                 <input 
                     type="checkbox" 
-                    class="task-checkbox form-check-input" 
+                    class="task-item__checkbox" 
                     ${task.completed ? 'checked' : ''}
+                    aria-label="Toggle task completion"
                 >
-                <span class="task-text flex-grow-1 ${task.completed ? 'text-decoration-line-through text-muted' : ''}">
+                <span class="task-item__text">
                     ${this.escapeHtml(task.text)}
                 </span>
-                <div class="task-actions d-flex gap-2">
+                <div class="task-item__actions">
                     <button 
-                        class="delete-task-btn btn btn-sm btn-outline-danger"
+                        class="task-item__button"
                         title="Delete task"
+                        aria-label="Delete task"
                     >
                         <i class="bi bi-trash"></i>
                     </button>

@@ -1,70 +1,430 @@
-/* Custom styles for Task Manager */
+/* Bento-style Task Manager - BEM Methodology */
 
 :root {
-    --primary-color: #0d6efd;
-    --success-color: #198754;
-    --danger-color: #dc3545;
-    --border-radius: 0.75rem;
+    /* Colors */
+    --color-bg: #f5f7fa;
+    --color-surface: #ffffff;
+    --color-surface-hover: #fafbfc;
+    --color-border: #e1e8ed;
+    --color-border-active: #d0d7de;
+    --color-primary: #0969da;
+    --color-primary-hover: #0860ca;
+    --color-text: #24292f;
+    --color-text-secondary: #656d76;
+    --color-text-muted: #8b949e;
+    --color-success: #1a7f37;
+    --color-danger: #cf222e;
+    --color-danger-hover: #a40e26;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    
+    /* Border Radius */
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.2s ease;
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.rounded-4 {
-    border-radius: var(--border-radius) !important;
+/* App Container */
+.app {
+    min-height: 100vh;
+    padding: var(--spacing-lg);
 }
 
+.app__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    grid-auto-rows: min-content;
+}
+
+/* Bento Card - Base */
+.bento-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.bento-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-border-active);
+}
+
+/* Bento Card - Modifiers */
+.bento-card--header {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: var(--spacing-xl);
+}
+
+.bento-card--input {
+    grid-column: 1 / -1;
+}
+
+.bento-card--filters {
+    grid-column: 1 / -1;
+}
+
+.bento-card--tasks {
+    grid-column: 1 / -1;
+    min-height: 300px;
+}
+
+.bento-card--stats {
+    grid-column: 1 / -1;
+}
+
+/* Header Card */
+.bento-card__title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.bento-card__icon {
+    color: var(--color-primary);
+    font-size: 2rem;
+}
+
+.bento-card__subtitle {
+    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+}
+
+/* Input Form */
+.input-form {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.input-form__field {
+    flex: 1;
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--color-text);
+    background: var(--color-surface);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input-form__field:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.1);
+}
+
+.input-form__field::placeholder {
+    color: var(--color-text-muted);
+}
+
+.input-form__button {
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-fast);
+    min-width: 48px;
+}
+
+.input-form__button:hover {
+    background: var(--color-primary-hover);
+}
+
+.input-form__button:active {
+    transform: scale(0.98);
+}
+
+/* Filter Group */
+.filter-group {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.filter-group__button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: inherit;
+}
+
+.filter-group__button:hover {
+    background: var(--color-surface-hover);
+    border-color: var(--color-border-active);
+    color: var(--color-text);
+}
+
+.filter-group__button--active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+}
+
+.filter-group__button--active:hover {
+    background: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+}
+
+/* Task List */
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+/* Task Item */
 .task-item {
-    transition: all 0.2s ease-in-out;
-    border-left: 4px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-base);
+    border-left: 3px solid transparent;
 }
 
 .task-item:hover {
-    background-color: #f8f9fa;
-    transform: translateX(4px);
+    background: var(--color-surface-hover);
+    border-color: var(--color-border-active);
+    transform: translateX(2px);
 }
 
-.task-item.completed {
-    border-left-color: var(--success-color);
-    opacity: 0.7;
+.task-item--completed {
+    border-left-color: var(--color-success);
+    opacity: 0.85;
 }
 
-.task-item.completed .task-text {
-    text-decoration: line-through;
-    color: #6c757d;
-}
-
-.filter-btn.active {
-    background-color: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-}
-
-.task-checkbox {
-    cursor: pointer;
+.task-item__checkbox {
     width: 20px;
     height: 20px;
+    cursor: pointer;
+    accent-color: var(--color-success);
+    flex-shrink: 0;
 }
 
-.task-actions {
+.task-item__text {
+    flex: 1;
+    color: var(--color-text);
+    font-size: 0.9375rem;
+    word-break: break-word;
+}
+
+.task-item--completed .task-item__text {
+    text-decoration: line-through;
+    color: var(--color-text-muted);
+}
+
+.task-item__actions {
+    display: flex;
+    gap: var(--spacing-xs);
     opacity: 0;
-    transition: opacity 0.2s ease-in-out;
+    transition: opacity var(--transition-base);
 }
 
-.task-item:hover .task-actions {
+.task-item:hover .task-item__actions {
     opacity: 1;
 }
 
-.btn-sm {
-    padding: 0.25rem 0.5rem;
+.task-item__button {
+    padding: var(--spacing-xs);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
     font-size: 0.875rem;
+    min-width: 32px;
+    height: 32px;
 }
 
-#emptyState {
+.task-item__button:hover {
+    background: var(--color-danger);
+    border-color: var(--color-danger);
+    color: white;
+}
+
+/* Empty State */
+.empty-state {
+    display: none;
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-md);
+    color: var(--color-text-secondary);
+}
+
+.empty-state--visible {
+    display: block;
+}
+
+.empty-state__icon {
+    font-size: 3rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+    display: block;
+}
+
+.empty-state__text {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+}
+
+/* Stats */
+.stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.stats__count {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.stats__button {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-danger);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: inherit;
+}
+
+.stats__button:hover {
+    background: var(--color-danger);
+    border-color: var(--color-danger);
+    color: white;
+}
+
+.stats__button span {
     display: none;
 }
 
-#emptyState.show {
-    display: block;
+/* Responsive Design */
+@media (min-width: 768px) {
+    .app__container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .bento-card--header {
+        grid-column: 1 / -1;
+    }
+    
+    .bento-card--input {
+        grid-column: 1 / -1;
+    }
+    
+    .bento-card--filters {
+        grid-column: 1 / 2;
+    }
+    
+    .bento-card--tasks {
+        grid-column: 1 / -1;
+    }
+    
+    .bento-card--stats {
+        grid-column: 1 / -1;
+    }
+    
+    .stats__button span {
+        display: inline;
+    }
+}
+
+@media (min-width: 1024px) {
+    .app {
+        padding: var(--spacing-xl);
+    }
+    
+    .app__container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .bento-card--header {
+        grid-column: 1 / -1;
+    }
+    
+    .bento-card--input {
+        grid-column: 1 / -1;
+    }
+    
+    .bento-card--filters {
+        grid-column: 1 / 2;
+    }
+    
+    .bento-card--tasks {
+        grid-column: 2 / -1;
+    }
+    
+    .bento-card--stats {
+        grid-column: 1 / -1;
+    }
 }

@@ -8,17 +8,17 @@ A modern, feature-rich task management application built with vanilla JavaScript
 - 🔍 Filter tasks by status (All, Active, Completed)
 - 💾 Persistent storage using localStorage
 - 📊 Task statistics and counters
-- 🎨 Modern UI with Tailwind CSS and Bootstrap
+- 🎨 Bento-style UI design - clean and modern
 - 📱 Responsive design for all devices
 - ⚡ No page reload required for operations
+- 🎯 BEM methodology for maintainable CSS
 
 ## Technology Stack
 
 - **HTML5** - Semantic markup
-- **CSS3** - Custom styles with CSS variables
+- **CSS3** - Custom styles with CSS variables and BEM methodology
 - **JavaScript (ES6+)** - Vanilla JS with modules
-- **Tailwind CSS** - Utility-first CSS framework
-- **Bootstrap 5** - Component library
+- **Bootstrap Icons** - Icon library
 - **localStorage** - Client-side data persistence
 
 ## Project Structure
@@ -98,6 +98,15 @@ The application is built with a modular architecture:
 - Coordinates UI interactions
 - Renders task list and updates display
 - Manages event listeners
+
+## Design System
+
+The project uses a **Bento-style design** with a clean, card-based layout:
+
+- **BEM Methodology**: All CSS classes follow Block-Element-Modifier naming convention
+- **CSS Variables**: Centralized design tokens for colors, spacing, and transitions
+- **Responsive Grid**: Adaptive layout that works on all screen sizes
+- **Minimalist Aesthetic**: Clean, uncluttered interface for easy navigation
 
 ## Future Migration Path
 
