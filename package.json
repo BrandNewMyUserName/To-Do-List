@@ -1,0 +1,22 @@
+{
+  "name": "task-manager",
+  "version": "1.0.0",
+  "description": "A modern task management application built with TypeScript",
+  "type": "module",
+  "scripts": {
+    "build": "npx tsc",
+    "watch": "npx tsc --watch",
+    "dev": "npx tsc --watch"
+  },
+  "keywords": [
+    "task-manager",
+    "typescript",
+    "todo-list"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}
+

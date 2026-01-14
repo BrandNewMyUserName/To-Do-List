@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# TypeScript build output
+js/*.js
+js/*.js.map
+js/*.d.ts
+!js/app.js
+!js/taskManager.js
+!js/storage.js
+js/*.d.ts.map
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
