@@ -21,6 +21,22 @@
             <p class="bento-card__subtitle">Organize your tasks efficiently</p>
         </header>
 
+        <!-- Stats Card -->
+        <div class="bento-card bento-card--stats">
+            <div class="stats">
+                <span id="taskCount" class="stats__count">0 tasks</span>
+                <button 
+                    id="clearCompletedBtn" 
+                    class="stats__button"
+                    style="display: none;"
+                    aria-label="Clear completed tasks"
+                >
+                    <i class="bi bi-trash"></i>
+                    <span>Clear Completed</span>
+                </button>
+            </div>
+        </div>
+
         <!-- Input Card -->
         <section class="bento-card bento-card--input">
             <div class="input-form">
@@ -81,22 +97,6 @@
                 <p class="empty-state__text">No tasks yet. Add one to get started!</p>
             </div>
         </section>
-
-        <!-- Stats Card -->
-        <footer class="bento-card bento-card--stats">
-            <div class="stats">
-                <span id="taskCount" class="stats__count">0 tasks</span>
-                <button 
-                    id="clearCompletedBtn" 
-                    class="stats__button"
-                    style="display: none;"
-                    aria-label="Clear completed tasks"
-                >
-                    <i class="bi bi-trash"></i>
-                    <span>Clear Completed</span>
-                </button>
-            </div>
-        </footer>
     </div>
     
     <!-- Application Scripts -->
